@@ -1,7 +1,9 @@
 import './App.css';
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Login from "./Login";
+import SignUp from './Signup';
 import Home from './Home';
 import Restaurants from './Restaurants';
 import { UserProvider } from "./context/user";
@@ -9,11 +11,15 @@ import { UserProvider } from "./context/user";
 function App() {
   return (
     <div className="App">
+      <h2>Foodie Houston</h2>
       <UserProvider>
         <Navbar />
-        <Login />
-        <Home />
-        <Restaurants />
+        <Routes>
+          <Route path="/" element={ <Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element = {<SignUp /> } />
+          <Route path="/restaurants" element={<Restaurants />} />  
+        </Routes>
       </UserProvider>
     </div>
   );
