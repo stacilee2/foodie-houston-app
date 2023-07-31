@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   resources :restaurants, only: [:index, :show]
 
+  resources :users, only: [:create, :show] do
+    resources :reservations
+  end
+
+  post "/restaurants/:restaurant_id/reservations", to: "reservations#create"
+
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
   post "/login", to: "sessions#create"

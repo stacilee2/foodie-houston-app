@@ -1,3 +1,5 @@
 class RestaurantSerializer < ActiveModel::Serializer
-  attributes :name, :cuisine, :description, :image_url
+  attributes :id, :name, :cuisine, :description, :image_url
+
+  has_many :reservations
 end

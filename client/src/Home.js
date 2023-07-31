@@ -1,22 +1,9 @@
-import React, { useContext } from 'react';
-import { UserContext } from './context/user';
+import React from 'react';
 
 function Home() {
 
-    const {user} = useContext(UserContext)
-    if (!user || user.errors) {
-      return(<h3>Please login or signup</h3>)
-    } else {
-      return (
-        <div>
-          <h3>{user.name}</h3>
-        </div>
-      )
-    }
-    
-
   return (
-    <div>Home</div>
+    <p>For the true foodie, this application beats all other food review or reservation sites. We went through all the hard work to find THE best NEW restaurants recognized by Bon Appétit, James Beard, Esquire, among a few.</p>
   )
 }
 

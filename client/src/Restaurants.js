@@ -12,15 +12,14 @@ function Restaurants() {
         .then(data => setRestaurantsList(data))
     }, []);
 
-    console.log(restaurantsList)
-
-    const user = useContext(UserContext)
-    console.log(user)
+    // const user = useContext(UserContext)
+    // console.log(user)
 
   return (
     <div>
+      <h3>RESTAURANTS: </h3>
         {restaurantsList.map(restaurant => {
-            return(<RestaurantCard restaurant={restaurant} key={restaurant.id}/>)
+            return(<RestaurantCard restaurant={restaurant} key={restaurant.name}/>)
         })}
     </div>
   )

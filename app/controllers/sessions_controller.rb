@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorized, only: :create
+   
     #login
     def create
         user = User.find_by(username: params[:username])
@@ -17,9 +17,4 @@ class SessionsController < ApplicationController
         head :no_content
     end
     
-    private
-
-    def user_params
-        params.permit(:username, :password, :password_confirmation)
-    end
 end

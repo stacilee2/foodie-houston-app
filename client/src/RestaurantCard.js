@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import CreateReservation from './CreateReservation';
 
 function RestaurantCard( {restaurant}) {
     const { id, name, cuisine, description, image_url } = restaurant
@@ -8,6 +10,8 @@ function RestaurantCard( {restaurant}) {
     <h4>{cuisine}</h4>
     <p>{description}</p>
     <img src={image_url} alt={name} className="img" />
+    <h4>Make a Reservation</h4>
+    <CreateReservation restaurantId = {id} />
     <hr />
     </div>
   )

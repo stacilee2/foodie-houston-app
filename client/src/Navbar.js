@@ -1,51 +1,82 @@
 import React, { useContext } from 'react';
 import { UserContext } from './context/user';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
-    const user = useContext(UserContext)
-    let name = user.name
-    console.log(name)
 
-  return (
-    <div className="nav-bar">
-        <Link 
-          to="/" 
-          className="nav-link"
-          activestyle={{ fontWeight: "bold", color: "pink"
-          }}>
-        Home
-        </Link>
-        <Link 
-          to="/restaurants" 
-          className="nav-link"
-          activestyle={{ fontWeight: "bold", color: "pink"
-          }}>
-        Restaurants
-        </Link>
-        <Link 
-          to="/reservations" 
-          className="nav-link"
-          activestyle={{ fontWeight: "bold", color: "pink"
-          }}>
-        Reservations
-        </Link>
-        <Link 
-          to="/login" 
-          className="nav-link"
-          activestyle={{ fontWeight: "bold", color: "pink"
-          }}>
-        Login
-        </Link>
-        <Link 
-          to="/signup" 
-          className="nav-link"
-          activestyle={{ fontWeight: "bold", color: "pink"
-          }}>
-        Signup
-        </Link>
-      </div>
-    )
+  const {user, onLogout, loggedIn} = useContext(UserContext)
+  const navigate = useNavigate()
+
+  const logoutUser = () => {
+    fetch('/logout', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json'}
+    })
+    .then(()=> {
+      onLogout()
+      navigate('/')
+    })
+  }
+
+    if (!loggedIn || user.errors) {
+      return(
+        <div>
+        <div className="nav-bar">
+            <Link 
+              to="/" 
+              className="nav-link"
+              activestyle={{ fontWeight: "bold", color: "pink"
+              }}>
+            Home
+            </Link>
+            <Link 
+              to="/restaurants" 
+              className="nav-link"
+              activestyle={{ fontWeight: "bold", color: "pink"
+              }}>
+            Restaurants
+            </Link>
+            <Link 
+              to="/login" 
+              className="nav-link"
+              activestyle={{ fontWeight: "bold", color: "pink"
+              }}>
+            Login/Signup
+            </Link>
+        </div>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+           <div className="nav-bar">
+           <p className="greeting">Welcome, {user.name} <button onClick={logoutUser}>Logout</button></p>
+              <Link 
+                  to="/" 
+                  className="nav-link"
+                  activestyle={{ fontWeight: "bold", color: "pink"
+                  }}>
+                Home
+                </Link>
+                <Link 
+                  to="/restaurants" 
+                  className="nav-link"
+                  activestyle={{ fontWeight: "bold", color: "pink"
+                  }}>
+                Restaurants
+                </Link>
+                <Link 
+                  to="/reservations" 
+                  className="nav-link"
+                  activestyle={{ fontWeight: "bold", color: "pink"
+                  }}>
+                Reservations
+                </Link>
+            </div>
+        </div>
+      )
+    }
+   
 }
 
 export default Navbar

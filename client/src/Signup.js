@@ -1,57 +1,96 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from './context/user';
 
 function Signup() {
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [errorsList, setErrorsList] = useState("")
+    const { signup } = useContext(UserContext)
+    const navigate = useNavigate();
   
-    // function handleSubmit(e) {
-    //   e.preventDefault();
-    //   fetch("/signup", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       username,
-    //       password,
-    //       password_confirmation: passwordConfirmation,
-    //     }),
-    //   })
-    //     .then((r) => r.json())
-    //     .then(data => console.log(data));
-    // }
+    function handleSubmit(e) {
+      e.preventDefault();
+      fetch("/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          username: username,
+          password: password,
+          password_confirmation: passwordConfirmation,
+        }),
+      })
+        .then((r) => r.json())
+        .then(user => {
+          if (user.error) {
+            const errorLis = user.error
+            setErrorsList(errorLis)
+            setName("")
+            setUsername("")
+            setPassword("")
+            setPasswordConfirmation("")
+          } else {
+          navigate("/restaurants")
+            signup(user)
+            setName("")
+            setUsername("")
+            setPassword("")
+            setPasswordConfirmation("")
+          }
+        })
+    }
   
     return (
     <div>
-      Signup
-        {/* <h3>Sign-up for your free account today:</h3>
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
+        <ul className="error">{errorsList}</ul>
+        <h4>Sign-up for your free account today:</h4>
+      <form onSubmit={handleSubmit} className="login-signup-form"> 
+      SIGN-UP 
+      <br/>
+      <hr />
+      <label>Name: </label>
         <input
           type="text"
-          id="username"
+          id="signup-name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <br />
+        <br/>
+        <label>Username: </label>
+        <input
+          type="text"
+          id="signup-username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <br />
-        <label>Password:</label>
+        <br/>
+        <label>Password: </label>
         <input
           type="password"
-          id="password"
+          id="signup-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
          <br />
-        <label>Confirm Password:</label>
+         <br/>
+        <label>Confirm Password: </label>
         <input
           type="password"
-          id="password_confirmation"
+          id="signup-password_confirmation"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
+         <br/>
+         <br/>
         <button type="submit">Submit</button>
-      </form> */}
+      </form>
       </div>
     );
 }

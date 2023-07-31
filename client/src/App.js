@@ -6,6 +6,7 @@ import Login from "./Login";
 import SignUp from './Signup';
 import Home from './Home';
 import Restaurants from './Restaurants';
+import Reservations from './Reservations';
 import { UserProvider } from "./context/user";
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
           <Route path="/" element={ <Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element = {<SignUp /> } />
-          <Route path="/restaurants" element={<Restaurants />} />  
+          <Route path="/restaurants" element={<Restaurants />} />
+          <Route path="/reservations" element={<Reservations />} />
         </Routes>
       </UserProvider>
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Signup from "../Signup";
+import { useNavigate } from "react-router-dom";
 
 // create the context
 const UserContext = React.createContext();
@@ -8,29 +8,65 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
 
     const [user, setUser] = useState({});
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [reservations, setReservations] = useState([])
+    const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("/me")
-        .then((response) => {
-            if (response.ok) {
-                response.json().then((user) => setUser(user));
-            }
-        });
+        fetch('/me')
+        .then(res => res.json())
+        .then(data => {
+            setUser(data)
+            if (data.error) {
+                setLoggedIn(false)
+            } else {
+                setLoggedIn(true)
+                getReservations()
+            } 
+        })
     }, []);
 
-    function onLogin(user) {
-        setUser(user);
+    function getReservations() {
+        // fetch('/reservations')
+        // .then( r => r.json())
+        // .then(data => {
+        //    setReservations(data)
+        // })
     }
 
-    function signup() {
+    function addReservation(formData, restaurantId) {
+        console.log("posted", formData);
+        fetch(`/restaurants/${restaurantId}/reservations`, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData),
+        })
+        .then(r => r.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+     
+    function onLogin(user) {
+        setUser(user);
+        setLoggedIn(true)
+        navigate('/restaurants')
+    }
+
+    function signup(user) {
+        setUser(user)
+        setLoggedIn(true)
     }
 
     function onLogout() {
-        setUser(null);
+        setUser({})
+        setLoggedIn(false)
     }
-  // the value prop of the provider will be our context data
-  // this value will be available to child components of this provider
-  return <UserContext.Provider value={{user, onLogin, onLogout, signup}}>{children}</UserContext.Provider>;
+
+  return <UserContext.Provider value={{user, reservations, addReservation, onLogin, onLogout, signup, loggedIn}}>{children}</UserContext.Provider>;
 }
 
 export { UserContext, UserProvider };
