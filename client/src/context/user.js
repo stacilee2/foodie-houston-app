@@ -27,32 +27,48 @@ function UserProvider({ children }) {
     }, []);
 
     function getReservations() {
-        // fetch('/reservations')
-        // .then( r => r.json())
-        // .then(data => {
-        //    setReservations(data)
-        // })
+        fetch('/reservations')
+        .then( r => r.json())
+        .then(data => {
+           setReservations(data)
+        })
     }
 
     function addReservation(formData, restaurantId) {
-        console.log("posted", formData);
         fetch(`/restaurants/${restaurantId}/reservations`, {
         method: "POST",
         headers: {
             "Accept": "application/json",
-          "Content-Type": "application/json"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(formData),
         })
         .then(r => r.json())
         .then(data => {
-            console.log(data)
+            setReservations([...reservations, data])
+            navigate('/reservations')
         })
     }
-     
+
+    function handleDeleteClick(deletedRes){
+        const reservationId = deletedRes.target.id
+        
+        fetch(`/reservations/${reservationId}`, {
+          method: "DELETE",
+        })
+        .then((r) => r.json())
+        .then((deletedRes) => handleDeleteRes(deletedRes))
+    }
+    
+    function handleDeleteRes(deletedRes){
+        const currentReservations = reservations.find(res => res.id !== deletedRes.id)
+        setReservations([currentReservations])
+    }
+
     function onLogin(user) {
         setUser(user);
         setLoggedIn(true)
+        getReservations()
         navigate('/restaurants')
     }
 
@@ -66,7 +82,7 @@ function UserProvider({ children }) {
         setLoggedIn(false)
     }
 
-  return <UserContext.Provider value={{user, reservations, addReservation, onLogin, onLogout, signup, loggedIn}}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{user, reservations, addReservation, handleDeleteClick, onLogin, onLogout, signup, loggedIn}}>{children}</UserContext.Provider>;
 }
 
 export { UserContext, UserProvider };

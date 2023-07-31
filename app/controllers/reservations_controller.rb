@@ -1,4 +1,4 @@
-require 'json'
+# require 'json'
 class ReservationsController < ApplicationController
 
     def index
@@ -18,6 +18,16 @@ class ReservationsController < ApplicationController
     def create
         reservation = Reservation.create(reservation_params)
         render json: reservation
+    end
+
+    def destroy
+        reservation = Reservation.find_by(reservation_params)
+        if reservation
+            reservation.destroy
+            render json: {}
+        else
+            render json: { error: "Reservation not found" }, status: :not_found
+        end
     end
 
     private

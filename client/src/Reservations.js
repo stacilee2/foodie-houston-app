@@ -3,11 +3,20 @@ import { UserContext } from './context/user';
 
 function Reservations() {
 
-  const {reservations} = useContext(UserContext)
+  const {reservations, handleDeleteClick} = useContext(UserContext)
+
   return (
     <div>
       <h2>Upcoming Reservations:</h2>
-      {reservations.map(reservation => <li>{reservation}</li>)}
+      {reservations.map(reservation => 
+          <div className="reservation-card" key={reservation.id}>
+          <h4>{reservation.restaurant.name}</h4>
+          <p>{reservation.date}</p>
+          <p>{reservation.time}</p>
+          <p>{reservation.party_size}</p>
+          <button onClick={handleDeleteClick} id={reservation.id}>Delete</button>
+          </div>)
+      }
     </div>
   )
 }

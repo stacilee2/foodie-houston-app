@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     resources :reservations
   end
 
+  get "/reservations", to: "reservations#index"
+  delete "/reservations/:reservation_id", to: "reservations#destroy"
+
   post "/restaurants/:restaurant_id/reservations", to: "reservations#create"
 
   post "/signup", to: "users#create"
