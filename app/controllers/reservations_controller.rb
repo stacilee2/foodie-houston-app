@@ -1,4 +1,3 @@
-# require 'json'
 class ReservationsController < ApplicationController
 
     def index
@@ -16,15 +15,25 @@ class ReservationsController < ApplicationController
     end
 
     def create
-        reservation = Reservation.create(reservation_params)
+        reservation = current_user.reservations.create(reservation_params)
         render json: reservation
     end
 
     def destroy
-        reservation = Reservation.find_by(reservation_params)
+        reservation = Reservation.find_by(id: params[:reservation_id])
         if reservation
             reservation.destroy
-            render json: {}
+            render json: reservation
+        else
+            render json: { error: "Reservation not found" }, status: :not_found
+        end
+    end
+
+    def update
+        reservation = Reservation.find_by(id: params[:reservation_id])
+        if reservation
+            reservation.update(reservation_params)
+            render json: reservation
         else
             render json: { error: "Reservation not found" }, status: :not_found
         end
@@ -38,6 +47,5 @@ class ReservationsController < ApplicationController
 
     def reservation_params
         params.permit(:date, :time, :party_size, :restaurant_id)
-            .merge({user_id: session[:user_id]})
     end
 end

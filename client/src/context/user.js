@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EditResForm from "../EditResForm";
+
 
 // create the context
 const UserContext = React.createContext();
@@ -11,6 +13,14 @@ function UserProvider({ children }) {
     const [loggedIn, setLoggedIn] = useState(false)
     const [reservations, setReservations] = useState([])
     const navigate = useNavigate();
+    const [restaurantsList, setRestaurantsList] = useState([])
+
+    useEffect(() => {
+        fetch("/restaurants")
+        .then(res => res.json())
+        .then(data => setRestaurantsList(data))
+    }, []);
+
 
     useEffect(() => {
         fetch('/me')
@@ -50,9 +60,9 @@ function UserProvider({ children }) {
         })
     }
 
-    function handleDeleteClick(deletedRes){
-        const reservationId = deletedRes.target.id
-        
+    function handleDeleteClick(e){
+        const reservationId = e.target.id
+        console.log("reservationId", reservationId);
         fetch(`/reservations/${reservationId}`, {
           method: "DELETE",
         })
@@ -61,8 +71,31 @@ function UserProvider({ children }) {
     }
     
     function handleDeleteRes(deletedRes){
-        const currentReservations = reservations.find(res => res.id !== deletedRes.id)
-        setReservations([currentReservations])
+        const filteredReservations = [...reservations].filter(res => res.id !== deletedRes.id)
+        setReservations(filteredReservations);
+    }
+
+    function handleEditRes(formData, reservationId) {
+        fetch(`/reservations/${reservationId}`, {
+        method: "PATCH",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData),
+        })
+        .then(r => r.json())
+        .then(data => {
+            onUpdateRes(data)
+            navigate('/reservations')
+        })
+    }
+
+    function onUpdateRes(updatedRes) {
+        console.log(updatedRes)
+        const newReservationsArray = [...reservations].filter(res => res.id !== updatedRes.id )
+        const updatedReservations = [...newReservationsArray, updatedRes]
+        setReservations(updatedReservations)
     }
 
     function onLogin(user) {
@@ -82,7 +115,7 @@ function UserProvider({ children }) {
         setLoggedIn(false)
     }
 
-  return <UserContext.Provider value={{user, reservations, addReservation, handleDeleteClick, onLogin, onLogout, signup, loggedIn}}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{user, restaurantsList, reservations, addReservation, handleDeleteClick, handleEditRes, onLogin, onLogout, signup, loggedIn}}>{children}</UserContext.Provider>;
 }
 
 export { UserContext, UserProvider };

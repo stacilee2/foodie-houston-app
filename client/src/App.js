@@ -8,6 +8,7 @@ import Home from './Home';
 import Restaurants from './Restaurants';
 import Reservations from './Reservations';
 import { UserProvider } from "./context/user";
+import EditResForm from './EditResForm';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/signup" element = {<SignUp /> } />
           <Route path="/restaurants" element={<Restaurants />} />
           <Route path="/reservations" element={<Reservations />} />
+          <Route path="/reservations/:reservationId/reservation/edit" element={<EditResForm />} />
         </Routes>
       </UserProvider>
     </div>

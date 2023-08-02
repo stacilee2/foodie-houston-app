@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get "/reservations", to: "reservations#index"
   delete "/reservations/:reservation_id", to: "reservations#destroy"
-
+  patch "reservations/:reservation_id", to: "reservations#update"
   post "/restaurants/:restaurant_id/reservations", to: "reservations#create"
 
   post "/signup", to: "users#create"

@@ -1,19 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from './context/user';
 import RestaurantCard from './RestaurantCard';
 
 function Restaurants() {
 
-    const [restaurantsList, setRestaurantsList] = useState([])
-
-    useEffect(() => {
-        fetch("/restaurants")
-        .then(res => res.json())
-        .then(data => setRestaurantsList(data))
-    }, []);
-
-    // const user = useContext(UserContext)
-    // console.log(user)
+  const { restaurantsList } = useContext(UserContext)
 
   return (
     <div>

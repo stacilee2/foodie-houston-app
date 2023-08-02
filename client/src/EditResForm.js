@@ -1,38 +1,40 @@
-import React, {useState, useContext} from 'react';
+import React, { useContext, useState} from 'react';
 import { UserContext } from './context/user';
+import { useParams } from 'react-router-dom';
 
+function EditResForm() {
 
-function CreateReservation( {restaurantId} ) {
-
-  const {addReservation} = useContext(UserContext)
-  const [formData, setFormData] = useState({
-    date: "",
-    time: "",
-    party_size: ""
-  });
-
+    const {reservationId} = useParams();
+    console.log(reservationId)
+    const {handleEditRes} = useContext(UserContext)
+    const [formData, setFormData] = useState({
+        date: "",
+        time: "",
+        party_size: ""
+    });
 
     function handleChange(e) {
-      const name = e.target.name
-      const value = e.target.value
-
-      setFormData({
-        ...formData,
-        [name]: value
-      })
+        const name = e.target.name
+        const value = e.target.value
+        
+        setFormData({
+            ...formData,
+            [name]: value
+        })
     }
 
     function handleSubmit(e) {
-      e.preventDefault();
-      setFormData("");
-      addReservation(formData, restaurantId);
+        e.preventDefault(); 
+        handleEditRes(formData, reservationId);
+        setFormData("");
     }
 
   return (
     <div className="form-container">
-      <p>Please choose what date, time, and party size for your reservation below.</p>
+      <p>Update your reservation below:
+      </p>
       <br />
-      <form className="form" onSubmit={handleSubmit} id={restaurantId}>
+      <form className="form" onSubmit={handleSubmit}>
       <label>Date: </label>
       <select onChange={handleChange} name="date">
         <option value="0">Select Date:</option>
@@ -90,4 +92,4 @@ function CreateReservation( {restaurantId} ) {
   )
 }
 
-export default CreateReservation;
+export default EditResForm;
