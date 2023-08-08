@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EditResForm from "../EditResForm";
 
-
-// create the context
 const UserContext = React.createContext();
 
-// create a provider component
 function UserProvider({ children }) {
 
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
     const [loggedIn, setLoggedIn] = useState(false)
     const [reservations, setReservations] = useState([])
     const navigate = useNavigate();
@@ -92,7 +88,6 @@ function UserProvider({ children }) {
     }
 
     function onUpdateRes(updatedRes) {
-        console.log(updatedRes)
         const newReservationsArray = [...reservations].filter(res => res.id !== updatedRes.id )
         const updatedReservations = [...newReservationsArray, updatedRes]
         setReservations(updatedReservations)

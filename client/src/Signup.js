@@ -7,7 +7,7 @@ function Signup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [errorsList, setErrorsList] = useState("")
+    const [errorsList, setErrorsList] = useState([])
     const { signup } = useContext(UserContext)
     const navigate = useNavigate();
   
@@ -28,8 +28,14 @@ function Signup() {
         .then((r) => r.json())
         .then(user => {
           if (user.error) {
-            const errorLis = user.error
-            setErrorsList(errorLis)
+            const errors = Object.entries(user.error)
+            errors.map(messages => {
+              setErrorsList(messages.join(", "))
+            })
+            
+            setTimeout(() => {
+                  setErrorsList("")
+              }, 5000);
             setName("")
             setUsername("")
             setPassword("")
@@ -47,11 +53,11 @@ function Signup() {
   
     return (
     <div>
-        <ul className="error">{errorsList}</ul>
         <h4>Sign-up for your free account today:</h4>
       <form onSubmit={handleSubmit} className="login-signup-form"> 
       SIGN-UP 
       <br/>
+      <ul className="error-card">{errorsList}</ul>
       <hr />
       <label>Name: </label>
         <input

@@ -13,7 +13,8 @@ import EditResForm from './EditResForm';
 function App() {
   return (
     <div className="App">
-      <h2>Foodie Houston</h2>
+      <h1 className="foodie-header">Foodie.</h1>
+      <div className="houston-banner"></div>
       <UserProvider>
         <Navbar />
         <Routes>

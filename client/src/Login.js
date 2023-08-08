@@ -5,6 +5,7 @@ import Signup from "./Signup";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([])
   const { onLogin } = useContext(UserContext)
 
   function handleSubmit(e) {
@@ -20,13 +21,25 @@ function Login() {
       })
       .then(r => r.json())
       .then(user => {
-          if(!user.errors) {
+          if(!user.error) {
             onLogin(user)
             setUsername("")
             setPassword("")
           } else {
+            const errors = Object.entries(user.error)
+            errors.map(messages => {
+              setErrors(messages.join(", "))
+
+              //   .map(err => {
+              //   return err.join(",")
+              // }))
+            })
+            setTimeout(() => {
+              setErrors("")
+            }, 5000);
             setUsername("")
             setPassword("")
+            
           }
       })
     }
@@ -38,6 +51,7 @@ function Login() {
       <form onSubmit={handleSubmit} className="login-signup-form">
         <p>LOGIN</p>
         <hr />
+        <div className="error-card">{errors}</div>
         <label>Username: </label>
         <input
           type="text"
@@ -54,6 +68,7 @@ function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <br/>
         <br/>
         <button type="submit">Login</button>
       </form> 

@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+    before_action :authorize
+    skip_before_action :authorize, only: [:index, :show]
 
     def index
         reservations = current_user.reservations
@@ -7,11 +9,7 @@ class ReservationsController < ApplicationController
 
     def show
         reservation = current_user.reservations.find_by(id: params[:id])
-        if reservation
-            render json: reservation
-        else
-            render json: { error: "Not Found" }, status: :unauthorized
-        end
+        render json: reservation
     end
 
     def create
@@ -21,22 +19,14 @@ class ReservationsController < ApplicationController
 
     def destroy
         reservation = Reservation.find_by(id: params[:reservation_id])
-        if reservation
-            reservation.destroy
-            render json: reservation
-        else
-            render json: { error: "Reservation not found" }, status: :not_found
-        end
+        reservation.destroy
+        render json: reservation
     end
 
     def update
         reservation = Reservation.find_by(id: params[:reservation_id])
-        if reservation
-            reservation.update(reservation_params)
-            render json: reservation
-        else
-            render json: { error: "Reservation not found" }, status: :not_found
-        end
+        reservation.update(reservation_params)
+        render json: reservation
     end
 
     private
@@ -47,5 +37,9 @@ class ReservationsController < ApplicationController
 
     def reservation_params
         params.permit(:date, :time, :party_size, :restaurant_id)
+    end
+
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
 end

@@ -36,19 +36,38 @@ function CreateReservation( {restaurantId} ) {
       <label>Date: </label>
       <select onChange={handleChange} name="date">
         <option value="0">Select Date:</option>
-        <option value="August 1, 2023">August 1, 2023</option>
-        <option value="August 2, 2023">August 2, 2023</option>
-        <option value="August 3, 2023">August 3, 2023</option>
-        <option value="August 4, 2023">August 4, 2023</option>
-        <option value="August 5, 2023">August 5, 2023</option>
-        <option value="August 6, 2023">August 6, 2023</option>
-        <option value="August 7, 2023">August 7, 2023</option>
-        <option value="August 8, 2023">August 8, 2023</option>
         <option value="August 9, 2023">August 9, 2023</option>
         <option value="August 10, 2023">August 10, 2023</option>
         <option value="August 11, 2023">August 11, 2023</option>
         <option value="August 12, 2023">August 12, 2023</option>
-        <option value="August 13, 2023">August 12, 2023</option>
+        <option value="August 13, 2023">August 13, 2023</option>
+        <option value="August 14, 2023">August 14, 2023</option>
+        <option value="August 15, 2023">August 15, 2023</option>
+        <option value="August 16, 2023">August 16, 2023</option>
+        <option value="August 17, 2023">August 17, 2023</option>
+        <option value="August 18, 2023">August 18, 2023</option>
+        <option value="August 19, 2023">August 19, 2023</option>
+        <option value="August 20, 2023">August 20, 2023</option>
+        <option value="August 21, 2023">August 21, 2023</option>
+        <option value="August 22, 2023">August 22, 2023</option>
+        <option value="August 23, 2023">August 23, 2023</option>
+        <option value="August 24, 2023">August 24, 2023</option>
+        <option value="August 25, 2023">August 25, 2023</option>
+        <option value="August 26, 2023">August 26, 2023</option>
+        <option value="August 27, 2023">August 27, 2023</option>
+        <option value="August 28, 2023">August 28, 2023</option>
+        <option value="August 29, 2023">August 29, 2023</option>
+        <option value="August 30, 2023">August 30, 2023</option>
+        <option value="August 31, 2023">August 31, 2023</option>
+        <option value="September 1, 2023">September 1, 2023</option>
+        <option value="September 2, 2023">September 2, 2023</option>
+        <option value="September 3, 2023">September 3, 2023</option>
+        <option value="September 4, 2023">September 4, 2023</option>
+        <option value="September 5, 2023">September 5, 2023</option>
+        <option value="September 6, 2023">September 6, 2023</option>
+        <option value="September 7, 2023">September 7, 2023</option>
+        <option value="September 8, 2023">September 8, 2023</option>
+        <option value="September 9, 2023">September 9, 2023</option>
       </select>
       <br />
       <br />
@@ -56,14 +75,23 @@ function CreateReservation( {restaurantId} ) {
     <select onChange={handleChange} name="time">
         <option value="0">Select time:</option>
         <option value="5:00 pm">5:00 pm</option>
+        <option value="5:15 pm">5:15 pm</option>
         <option value="5:30 pm">5:30 pm</option>
+        <option value="5:45 pm">5:45 pm</option>
         <option value="6:00 pm">6:00 pm</option>
+        <option value="6:15 pm">6:15 pm</option>
         <option value="6:30 pm">6:30 pm</option>
+        <option value="6:45 pm">6:45 pm</option>
         <option value="7:00 pm">7:00 pm</option>
+        <option value="7:15 pm">7:15 pm</option>
         <option value="7:30 pm">7:30 pm</option>
+        <option value="7:45 pm">7:45 pm</option>
         <option value="8:00 pm">8:00 pm</option>
+        <option value="8:15 pm">8:15 pm</option>
         <option value="8:30 pm">8:30 pm</option>
+        <option value="8:30 pm">8:45 pm</option>
         <option value="9:00 pm">9:00 pm</option>
+        <option value="9:15 pm">9:15 pm</option>
         <option value="9:30 pm">9:30 pm</option>
       </select>
       <br/>
