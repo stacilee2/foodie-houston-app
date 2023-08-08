@@ -2,6 +2,8 @@
 
 This application was created for the targeted "foodie" user, who wants to go beyond the Yelp review to find new acclaimed restaurants in Houston. 
 
+![Watch Video](https://youtu.be/fbqPk9sfpr8)
+
 ## Features
 - Create user account with a secured password
 - Login/logout with username and password ability
