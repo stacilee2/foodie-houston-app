@@ -4,6 +4,9 @@ This application was created for the targeted "foodie" user, who wants to go bey
 
 [![Watch the video](https://youtu.be/fbqPk9sfpr8)](https://youtu.be/fbqPk9sfpr8)
 
+[<img src="https://youtu.be/fbqPk9sfpr8" width="600" height="300"
+/>](https://youtu.be/fbqPk9sfpr8<VIDEO_ID>)
+
 ## Features
 - Create user account with a secured password
 - Login/logout with username and password ability
