@@ -28,18 +28,11 @@ function Signup() {
         .then((r) => r.json())
         .then(user => {
           if (user.error) {
-            const errors = Object.entries(user.error)
-            errors.map(messages => {
-              setErrorsList(messages.join(", "))
-            })
-            
-            setTimeout(() => {
-                  setErrorsList("")
-              }, 5000);
-            setName("")
-            setUsername("")
-            setPassword("")
-            setPasswordConfirmation("")
+              console.log("errors", user.error)
+              setErrorsList(user.error)
+              setTimeout(() => {
+                setErrorsList([])
+            }, 5000);
           } else {
           navigate("/restaurants")
             signup(user)
@@ -50,14 +43,18 @@ function Signup() {
           }
         })
     }
-  
+    
+    console.log(errorsList)
+
     return (
     <div>
         <h4>Sign-up for your free account today:</h4>
       <form onSubmit={handleSubmit} className="login-signup-form"> 
       SIGN-UP 
       <br/>
-      <ul className="error-card">{errorsList}</ul>
+      <ul className="error-card">{errorsList.map((error, index) => 
+        <li key={index}>{error}</li>
+      )}</ul>
       <hr />
       <label>Name: </label>
         <input

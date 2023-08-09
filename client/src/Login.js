@@ -27,13 +27,9 @@ function Login() {
             setPassword("")
           } else {
             const errors = Object.entries(user.error)
-            errors.map(messages => {
+            errors.map(messages => 
               setErrors(messages.join(", "))
-
-              //   .map(err => {
-              //   return err.join(",")
-              // }))
-            })
+            )
             setTimeout(() => {
               setErrors("")
             }, 5000);

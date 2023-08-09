@@ -5,7 +5,7 @@ import EditResForm from './EditResForm';
 
 function Reservations() {
 
-  const {reservations, handleDeleteClick, handleEditClick} = useContext(UserContext)
+  const { reservations, handleDeleteClick } = useContext(UserContext)
 
   return (
     <div>

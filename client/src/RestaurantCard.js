@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import { NavLink } from 'react-router-dom';
-import Login from './Login';
 import CreateReservation from './CreateReservation';
 import { UserContext } from './context/user';
 
