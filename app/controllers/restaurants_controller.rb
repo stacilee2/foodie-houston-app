@@ -1,7 +1,12 @@
 class RestaurantsController < ApplicationController
+
     def index
         restaurants = Restaurant.all
-        render json: restaurants
+        if restaurants
+            render json: restaurants
+        else
+            render json: { error: "Restaurants not found" }
+        end
     end
 
     def show

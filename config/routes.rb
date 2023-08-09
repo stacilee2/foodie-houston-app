@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Restaurants routes
   resources :restaurants, only: [:index, :show]
 
-  # Reservations routes with nested data
+  # Reservations routes with nested
   get "/reservations", to: "reservations#index"
   delete "/reservations/:reservation_id", to: "reservations#destroy"
   patch "reservations/:reservation_id", to: "reservations#update"

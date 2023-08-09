@@ -7,6 +7,8 @@ function Reservations() {
 
   const { reservations, handleDeleteClick } = useContext(UserContext)
 
+  console.log(reservations)
+
   return (
     <div>
       <h2>Upcoming Reservations:</h2>

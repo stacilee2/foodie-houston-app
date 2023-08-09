@@ -6,6 +6,7 @@ function Restaurants() {
 
   const { restaurantsList } = useContext(UserContext)
 
+  console.log(restaurantsList)
   return (
     <div>
       <h3>RESTAURANTS: </h3>

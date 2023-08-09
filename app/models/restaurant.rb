@@ -4,5 +4,6 @@ class Restaurant < ApplicationRecord
     validates :description, presence: true
     validates :image_url, presence: true
 
-    has_many :users, through: :reservations
+    # has_many :users, through: :reservations
+    has_many :reservations
 end

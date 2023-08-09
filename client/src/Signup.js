@@ -44,8 +44,6 @@ function Signup() {
         })
     }
     
-    console.log(errorsList)
-
     return (
     <div>
         <h4>Sign-up for your free account today:</h4>

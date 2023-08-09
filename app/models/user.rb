@@ -4,5 +4,6 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 5 }
     validates :password_confirmation, presence: true
 
+    has_many :reservations
     has_many :restaurants, through: :reservations
 end

@@ -28,7 +28,7 @@ function UserProvider({ children }) {
             } else {
                 setLoggedIn(true)
                 getReservations()
-            } 
+            }
         })
     }, []);
 
@@ -36,9 +36,12 @@ function UserProvider({ children }) {
         fetch('/reservations')
         .then( r => r.json())
         .then(data => {
+            console.log(data)
            setReservations(data)
         })
     }
+
+    console.log(reservations)
 
     function addReservation(formData, restaurantId) {
         fetch(`/restaurants/${restaurantId}/reservations`, {
