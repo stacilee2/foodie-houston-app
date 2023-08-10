@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 function EditResForm() {
 
     const {reservationId} = useParams();
-    console.log(reservationId)
     const {handleEditRes} = useContext(UserContext)
     const [formData, setFormData] = useState({
         date: "",
@@ -31,8 +30,8 @@ function EditResForm() {
 
   return (
     <div className="form-container">
-      <p>Update your reservation below:
-      </p>
+      <p>Update your reservation below:</p>
+      <hr />
       <br />
       <form className="form" onSubmit={handleSubmit}>
       <label>Date: </label>

@@ -9,15 +9,7 @@ function UserProvider({ children }) {
     const [loggedIn, setLoggedIn] = useState(false)
     const [reservations, setReservations] = useState([])
     const navigate = useNavigate();
-    const [restaurantsList, setRestaurantsList] = useState([])
-
-    useEffect(() => {
-        fetch("/restaurants")
-        .then(res => res.json())
-        .then(data => setRestaurantsList(data))
-    }, []);
-
-
+   
     useEffect(() => {
         fetch('/me')
         .then(res => res.json())
@@ -113,7 +105,7 @@ function UserProvider({ children }) {
         setLoggedIn(false)
     }
 
-  return <UserContext.Provider value={{user, restaurantsList, reservations, addReservation, handleDeleteClick, handleEditRes, onLogin, onLogout, signup, loggedIn}}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{user, reservations, addReservation, handleDeleteClick, handleEditRes, onLogin, onLogout, signup, loggedIn}}>{children}</UserContext.Provider>;
 }
 
 export { UserContext, UserProvider };
