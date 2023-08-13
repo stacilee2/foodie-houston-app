@@ -11,6 +11,7 @@ import { UserProvider } from "./context/user";
 import EditResForm from './EditResForm';
 
 function App() {
+  
   return (
     <div className="App">
       <h1 className="foodie-header">Foodie.</h1>

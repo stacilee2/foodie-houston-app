@@ -28,7 +28,6 @@ function UserProvider({ children }) {
         fetch('/reservations')
         .then( r => r.json())
         .then(data => {
-            console.log(data)
            setReservations(data)
         })
     }

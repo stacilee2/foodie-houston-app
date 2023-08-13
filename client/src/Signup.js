@@ -28,7 +28,6 @@ function Signup() {
         .then((r) => r.json())
         .then(user => {
           if (user.error) {
-              console.log("errors", user.error)
               setErrorsList(user.error)
               setTimeout(() => {
                 setErrorsList([])

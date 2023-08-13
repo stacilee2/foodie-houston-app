@@ -5,7 +5,7 @@ import Signup from "./Signup";
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([])
+  const [errorsList, setErrorsList] = useState("")
   const { onLogin } = useContext(UserContext)
 
   function handleSubmit(e) {
@@ -26,19 +26,15 @@ function Login() {
             setUsername("")
             setPassword("")
           } else {
-            const errors = Object.entries(user.error)
-            errors.map(messages => 
-              setErrors(messages.join(", "))
-            )
+            setErrorsList(user.error)
             setTimeout(() => {
-              setErrors("")
+              setErrorsList("")
             }, 5000);
-            setUsername("")
-            setPassword("")
-            
           }
       })
     }
+
+    console.log(errorsList)
   
 
   return (
@@ -46,8 +42,8 @@ function Login() {
       <h4>Please Login or Sign-up Here.</h4>
       <form onSubmit={handleSubmit} className="login-signup-form">
         <p>LOGIN</p>
+        <ul className="error-card">{errorsList}</ul>
         <hr />
-        <div className="error-card">{errors}</div>
         <label>Username: </label>
         <input
           type="text"
@@ -69,7 +65,6 @@ function Login() {
         <button type="submit">Login</button>
       </form> 
       <Signup />
-      
     </div>
   );
 }

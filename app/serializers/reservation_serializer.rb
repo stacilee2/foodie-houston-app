@@ -3,3 +3,4 @@ class ReservationSerializer < ActiveModel::Serializer
 
   belongs_to :restaurant
 end
+

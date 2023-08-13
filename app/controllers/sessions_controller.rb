@@ -1,6 +1,4 @@
 class SessionsController < ApplicationController
-    rescue_from ActiveRecord::RecordInvalid, with: :render_unauthorized_response
-   
     #login
     def create
         user = User.find_by(username: params[:username])
@@ -8,7 +6,7 @@ class SessionsController < ApplicationController
             session[:user_id] = user.id
             render json: user, status: :created
         else
-            render json: { error: "Unauthorized"}, status: :unauthorized
+            render json: { error: "Invalid username or password"}, status: :unauthorized
         end
     end
 
@@ -18,10 +16,4 @@ class SessionsController < ApplicationController
         head :no_content
     end
 
-    private
-
-    def render_unauthorized_response(invalid)
-        render json: { error: invalid.record.errors.full_messages }, status: :unauthorized
-    end
-    
 end
