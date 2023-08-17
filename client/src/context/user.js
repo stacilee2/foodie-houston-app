@@ -32,8 +32,6 @@ function UserProvider({ children }) {
         })
     }
 
-    console.log(reservations)
-
     function addReservation(formData, restaurantId) {
         fetch(`/restaurants/${restaurantId}/reservations`, {
         method: "POST",

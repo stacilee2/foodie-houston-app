@@ -36,14 +36,6 @@ function CreateReservation( {restaurantId} ) {
       <label>Date: </label>
       <select onChange={handleChange} name="date">
         <option value="0">Select Date:</option>
-        <option value="August 9, 2023">August 9, 2023</option>
-        <option value="August 10, 2023">August 10, 2023</option>
-        <option value="August 11, 2023">August 11, 2023</option>
-        <option value="August 12, 2023">August 12, 2023</option>
-        <option value="August 13, 2023">August 13, 2023</option>
-        <option value="August 14, 2023">August 14, 2023</option>
-        <option value="August 15, 2023">August 15, 2023</option>
-        <option value="August 16, 2023">August 16, 2023</option>
         <option value="August 17, 2023">August 17, 2023</option>
         <option value="August 18, 2023">August 18, 2023</option>
         <option value="August 19, 2023">August 19, 2023</option>
@@ -68,6 +60,14 @@ function CreateReservation( {restaurantId} ) {
         <option value="September 7, 2023">September 7, 2023</option>
         <option value="September 8, 2023">September 8, 2023</option>
         <option value="September 9, 2023">September 9, 2023</option>
+        <option value="September 10, 2023">September 10, 2023</option>
+        <option value="September 11, 2023">September 11, 2023</option>
+        <option value="September 12, 2023">September 12, 2023</option>
+        <option value="September 13, 2023">September 13, 2023</option>
+        <option value="September 14, 2023">September 14, 2023</option>
+        <option value="September 15, 2023">September 15, 2023</option>
+        <option value="September 16, 2023">September 16, 2023</option>
+        <option value="September 17, 2023">September 17, 2023</option>
       </select>
       <br />
       <br />
