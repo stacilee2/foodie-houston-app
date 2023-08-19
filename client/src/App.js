@@ -7,6 +7,7 @@ import SignUp from './Signup';
 import Home from './Home';
 import Restaurants from './Restaurants';
 import Reservations from './Reservations';
+import Profile from './Profile';
 import { UserProvider } from "./context/user";
 import EditResForm from './EditResForm';
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/signup" element = {<SignUp /> } />
           <Route path="/restaurants" element={<Restaurants />} />
           <Route path="/reservations" element={<Reservations />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/reservations/:reservationId/reservation/edit" element={<EditResForm />} />
         </Routes>
       </UserProvider>

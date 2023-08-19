@@ -5,20 +5,25 @@ import EditResForm from './EditResForm';
 
 function Reservations() {
 
-  const { reservations, handleDeleteClick } = useContext(UserContext)
+  const { user, handleDeleteClick } = useContext(UserContext)
+
+  const reservations = user.reservations
 
   return (
     <div>
       <h2>Upcoming Reservations:</h2>
       {reservations.map(reservation => 
           <div className="reservation-card" key={reservation.id}>
-          <h4>{reservation.restaurant.name}</h4>
-        
+          <h4>{reservation.restaurant_name}</h4>
           <p>Date: {reservation.date}</p>
           <p>Time: {reservation.time}</p>
           <p>Number of guests: {reservation.party_size}</p>
           <div className="edit-delete-button">
-            <button onClick={handleDeleteClick} id={reservation.id}>Delete</button>  <NavLink to={`/reservations/${reservation.id}/reservation/edit`} element={<EditResForm />}>Edit Reservation</NavLink>
+            <button onClick={handleDeleteClick} id={reservation.id}>Delete</button>  
+            <NavLink  to={`/reservations/${reservation.id}/reservation/edit`} 
+                      element={<EditResForm />}>
+                        Edit Reservation
+            </NavLink>
           </div>
           <hr />
           </div>)

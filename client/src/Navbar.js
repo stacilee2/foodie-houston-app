@@ -72,6 +72,13 @@ function Navbar() {
                   }}>
                 Reservations
                 </Link>
+                <Link 
+                  to="/profile" 
+                  className="nav-link"
+                  activestyle={{ fontWeight: "bold", color: "pink"
+                  }}>
+                Profile
+                </Link>
             </div>
         </div>
       )

@@ -5,6 +5,10 @@ class Reservation < ApplicationRecord
     
     belongs_to :restaurant
     belongs_to :user
+
+    def restaurant_name
+        restaurant.name
+    end
 end
 
 

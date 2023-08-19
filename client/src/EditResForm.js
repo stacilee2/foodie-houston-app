@@ -3,7 +3,6 @@ import { UserContext } from './context/user';
 import { useParams } from 'react-router-dom';
 
 function EditResForm() {
-
     const {reservationId} = useParams();
     const {handleEditRes} = useContext(UserContext)
     const [formData, setFormData] = useState({
