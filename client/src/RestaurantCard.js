@@ -13,7 +13,7 @@ function RestaurantCard( {restaurant}) {
         <h3>{name}</h3>
         <h4>{cuisine}</h4>
         <p>{description}</p>
-        <img src={image_url} alt={name} className="img" />
+        <img src={image_url} alt={name} className="img" referrerPolicy="no-referrer" />
         <p>Menu: <a href={menu}>{menu}</a></p>
         <h4>Make a Reservation</h4>
         <CreateReservation restaurantId = {id} />
@@ -24,7 +24,7 @@ function RestaurantCard( {restaurant}) {
         <h3>{name}</h3>
         <h4>{cuisine}</h4>
         <p>{description}</p>
-        <img src={image_url} alt={name} className="img" />
+        <img src={image_url} alt={name} className="img" referrerPolicy="no-referrer"/>
         <p>Menu: <a href={menu}>{menu}</a></p>
         <br />
         <NavLink to="/login">Login to make reservation</NavLink>

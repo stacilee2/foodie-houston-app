@@ -59,7 +59,7 @@ function UserProvider({ children }) {
             })
         })
     }
-    
+
     function handleEditRes(formData, reservationId) {
         fetch(`/reservations/${reservationId}`, {
         method: "PATCH",
@@ -70,18 +70,16 @@ function UserProvider({ children }) {
         body: JSON.stringify(formData),
         })
         .then(r => r.json())
-        .then(data => {
-            onUpdateRes(data)
+        .then(updatedRes => {
+            const newReservationsArray = [...user.reservations].filter(res => res.id !== updatedRes.id )
+            const updatedReservations = [...newReservationsArray, updatedRes]
+            setUser(user => {
+                return {...user, reservations: updatedReservations}
+            })
             navigate('/reservations')
         })
     }
 
-    function onUpdateRes(updatedRes) {
-        console.log("in onUpdateRes function", updatedRes, user.reservations)
-        const newReservationsArray = [...user.reservations].filter(res => res.id !== updatedRes.id )
-        const updatedReservations = [...newReservationsArray, updatedRes]
-        setUser(...user.reservations, updatedReservations)
-    }
 
     function onLogin(user) {
         setUser(user);

@@ -1,13 +1,18 @@
 import React, {useContext} from 'react';
-import { NavLink } from 'react-router-dom';
 import { UserContext } from './context/user';
-import EditResForm from './EditResForm';
+import { useNavigate } from 'react-router-dom';
 
 function Reservations() {
 
-  const { user, handleDeleteClick } = useContext(UserContext)
-
+  const { user, handleDeleteClick} = useContext(UserContext)
   const reservations = user.reservations
+  const navigate = useNavigate()
+
+  function handleEditClick(e) {
+    let reservation = e.target.value
+    let reservationId = e.target.id
+    navigate(`/reservations/${reservation}/${reservationId}/reservation/edit`)
+  }
 
   return (
     <div>
@@ -18,13 +23,16 @@ function Reservations() {
           <p>Date: {reservation.date}</p>
           <p>Time: {reservation.time}</p>
           <p>Number of guests: {reservation.party_size}</p>
-          <div className="edit-delete-button">
-            <button onClick={handleDeleteClick} id={reservation.id}>Delete</button>  
-            <NavLink  to={`/reservations/${reservation.id}/reservation/edit`} 
-                      element={<EditResForm />}>
-                        Edit Reservation
-            </NavLink>
-          </div>
+            <button onClick={handleDeleteClick} id={reservation.id}>Delete</button> 
+            <button onClick={handleEditClick} 
+                    id={reservation.id} 
+                    value={[reservation.restaurant_name, reservation.date, reservation.time, reservation.party_size]}>
+                    Edit
+            </button> 
+            
+            {/* <NavLink to={`/reservations/${reservation.id}/reservation/edit`} element={<EditResForm name={reservation.id.restaurant_name}/>}>
+              Edit Reservation
+            </NavLink> */}
           <hr />
           </div>)
       }

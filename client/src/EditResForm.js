@@ -3,13 +3,12 @@ import { UserContext } from './context/user';
 import { useParams } from 'react-router-dom';
 
 function EditResForm() {
-    const {reservationId} = useParams();
+
+    const {reservation, reservationId} = useParams();
+    const currentReservation = reservation.split("  ")
+  
     const {handleEditRes} = useContext(UserContext)
-    const [formData, setFormData] = useState({
-        date: "",
-        time: "",
-        party_size: ""
-    });
+    const [formData, setFormData] = useState("");
 
     function handleChange(e) {
         const name = e.target.name
@@ -27,9 +26,16 @@ function EditResForm() {
         setFormData("");
     }
 
-  return (
+    return (
     <div className="form-container">
-      <p>Update your reservation below:</p>
+      <p>Update your reservation below: </p>
+      <h4>{currentReservation.map(res => {
+      return(
+          <div className="reservation-card" key={res}>
+            <p>{res}</p>
+          </div>
+      )
+      })}</h4>
       <hr />
       <br />
       <form className="form" onSubmit={handleSubmit}>
