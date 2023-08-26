@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Restaurants routes
-  resources :restaurants, only: [:index, :show]
+  resources :restaurants, only: [:index, :show] 
 
   # Reservations routes with nested
   get "/reservations", to: "reservations#index"

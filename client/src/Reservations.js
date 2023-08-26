@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Reservations() {
 
-  const { user, handleDeleteClick} = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const reservations = user.reservations
   const navigate = useNavigate()
 
@@ -14,6 +14,20 @@ function Reservations() {
     navigate(`/reservations/${reservation}/${reservationId}/reservation/edit`)
   }
 
+  function handleDeleteClick(e){
+    const reservationId = e.target.id
+    console.log("reservationId", reservationId);
+    fetch(`/reservations/${reservationId}`, {
+      method: "DELETE",
+    })
+    .then((r) => r.json())
+    .then((deletedRes) => {
+        setUser(user => {
+            return {...user, reservations: [...user.reservations.filter(res => res.id !== deletedRes.id)]}
+        })
+    })
+  }
+
   return (
     <div>
       <h2>Upcoming Reservations:</h2>
@@ -21,18 +35,17 @@ function Reservations() {
           <div className="reservation-card" key={reservation.id}>
           <h4>{reservation.restaurant_name}</h4>
           <p>Date: {reservation.date}</p>
-          <p>Time: {reservation.time}</p>
+          <p>Time: {reservation.time} pm</p>
           <p>Number of guests: {reservation.party_size}</p>
-            <button onClick={handleDeleteClick} id={reservation.id}>Delete</button> 
             <button onClick={handleEditClick} 
                     id={reservation.id} 
                     value={[reservation.restaurant_name, reservation.date, reservation.time, reservation.party_size]}>
                     Edit
             </button> 
-            
-            {/* <NavLink to={`/reservations/${reservation.id}/reservation/edit`} element={<EditResForm name={reservation.id.restaurant_name}/>}>
-              Edit Reservation
-            </NavLink> */}
+            <button onClick={handleDeleteClick} 
+                    id={reservation.id}>
+                    Delete
+            </button> 
           <hr />
           </div>)
       }

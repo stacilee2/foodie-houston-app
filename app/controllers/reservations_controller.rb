@@ -1,5 +1,4 @@
 class ReservationsController < ApplicationController
-    # skip_before_action :authorize, only: [:index, :show]
 
     def index
         reservations = current_user.reservations
@@ -13,17 +12,21 @@ class ReservationsController < ApplicationController
 
     def create
         reservation = current_user.reservations.create(reservation_params)
-        render json: reservation
+        if reservation.valid?
+            render json: reservation
+        else
+            render json: { errors: reservation.errors.full_messages }, status: :unprocessable_entity
+        end
     end
 
     def destroy
-        reservation = Reservation.find_by(id: params[:reservation_id])
+        reservation = current_user.reservations.find_by(id: params[:reservation_id])
         reservation.destroy
         render json: reservation
     end
 
     def update
-        reservation = Reservation.find_by(id: params[:reservation_id])
+        reservation = current_user.reservations.find_by(id: params[:reservation_id])
         reservation.update(reservation_params)
         render json: reservation
     end

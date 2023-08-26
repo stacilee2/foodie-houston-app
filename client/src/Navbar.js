@@ -18,7 +18,7 @@ function Navbar() {
     })
   }
 
-    if (!loggedIn || user.errors) {
+    if (!loggedIn) {
       return(
         <div>
         <div className="nav-bar">

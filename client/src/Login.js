@@ -33,8 +33,6 @@ function Login() {
           }
       })
     }
-
-    console.log(errorsList)
   
 
   return (

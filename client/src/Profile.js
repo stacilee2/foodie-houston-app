@@ -10,8 +10,8 @@ const Profile = () => {
         <h3>Profile</h3>
         <p>Name: {user.name} </p>
         <h4>You have reservations at the following restaurants: </h4>
-        {reservations.map((reservation) => 
-            <li> {reservation.restaurant_name} </li>
+        {reservations.map((reservation, index) => 
+            <li key={index}> {reservation.restaurant_name} </li>
         )}
     </div>
   )
