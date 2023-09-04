@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   delete "/reservations/:reservation_id", to: "reservations#destroy"
   patch "reservations/:reservation_id", to: "reservations#update"
   post "/restaurants/:restaurant_id/reservations", to: "reservations#create"
-  get "/find_reservations/:number", to: "reservations#find_reservations"
   
   # Users and sessions routes
   post "/signup", to: "users#create"
