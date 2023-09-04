@@ -2,12 +2,12 @@ Rails.application.routes.draw do
   # Restaurants routes
   resources :restaurants, only: [:index, :show] 
 
-  # Reservations routes with nested
   get "/reservations", to: "reservations#index"
   delete "/reservations/:reservation_id", to: "reservations#destroy"
   patch "reservations/:reservation_id", to: "reservations#update"
   post "/restaurants/:restaurant_id/reservations", to: "reservations#create"
-
+  get "/find_reservations/:number", to: "reservations#find_reservations"
+  
   # Users and sessions routes
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   
 
-  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+  # get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

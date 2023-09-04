@@ -16,21 +16,16 @@ function UserProvider({ children }) {
    
     useEffect(() => {
         fetch('/me')
-        .then(res => res.json())
-        .then(data => {
-            if (data.error) {
-                setLoggedIn(false)
-            } else {
-                setLoggedIn(true)
-                setUser(data)
+        .then((r) => {
+            if (r.ok) {
+              r.json().then((user) => onLogin(user))
             }
-        })
-    }, []);
-
+        }, []);
+    });
+        
     function onLogin(user) {
         setUser(user);
         setLoggedIn(true)
-        setUser(user)
         navigate('/restaurants')
     }
 
@@ -41,6 +36,7 @@ function UserProvider({ children }) {
 
     function onLogout() {
         setLoggedIn(false)
+        setUser({})
     }
 
   return <UserContext.Provider value={{user, setUser, onLogin, onLogout, signup, loggedIn}}>{children}</UserContext.Provider>;

@@ -10,6 +10,3 @@ class Reservation < ApplicationRecord
         restaurant.name
     end
 end
-
-
-

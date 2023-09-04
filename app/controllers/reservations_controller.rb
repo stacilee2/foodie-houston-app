@@ -1,17 +1,17 @@
 class ReservationsController < ApplicationController
 
     def index
-        reservations = current_user.reservations
+        reservations = @current_user.reservations
         render json: reservations
     end
 
     def show
-        reservation = current_user.reservations.find_by(id: params[:id])
+        reservation = @current_user.reservations.find_by(id: params[:id])
         render json: reservation
     end
 
     def create
-        reservation = current_user.reservations.create(reservation_params)
+        reservation = @current_user.reservations.create(reservation_params)
         if reservation.valid?
             render json: reservation
         else
@@ -20,24 +20,21 @@ class ReservationsController < ApplicationController
     end
 
     def destroy
-        reservation = current_user.reservations.find_by(id: params[:reservation_id])
+        reservation = @current_user.reservations.find_by(id: params[:reservation_id])
         reservation.destroy
         render json: reservation
     end
 
     def update
-        reservation = current_user.reservations.find_by(id: params[:reservation_id])
+        reservation = @current_user.reservations.find_by(id: params[:reservation_id])
         reservation.update(reservation_params)
         render json: reservation
     end
 
     private
 
-    def current_user
-        current_user = User.find_by(id: session[:user_id])
-    end
-
     def reservation_params
         params.permit(:date, :time, :party_size, :restaurant_id)
     end
+
 end
