@@ -72,7 +72,7 @@ function CreateReservation( {restaurantId} ) {
       const arrayOfMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
       const today = new Date()
       let dateArray = [];
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 31; i++) {
         const date = new Date();
         date.setDate(today.getDate() + i);    
         const day = date.getDate();
@@ -127,6 +127,6 @@ function CreateReservation( {restaurantId} ) {
     </form>
     </div>
   )
-}
+};
 
 export default CreateReservation;

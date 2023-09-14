@@ -31,6 +31,6 @@ function App() {
       </UserProvider>
     </div>
   );
-}
+};
 
 export default App;

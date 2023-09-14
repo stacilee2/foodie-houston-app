@@ -19,6 +19,6 @@ function Restaurants() {
         })}
     </div>
   )
-}
+};
 
-export default Restaurants
+export default Restaurants;

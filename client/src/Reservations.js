@@ -26,8 +26,8 @@ function Reservations() {
             return {...user, reservations: [...user.reservations.filter(res => res.id !== deletedRes.id)]}
         })
     })
-  }
-
+  };
+ 
   return (
     <div>
       <h2>Upcoming Reservations:</h2>
@@ -51,6 +51,6 @@ function Reservations() {
       }
     </div>
   )
-}
+};
 
-export default Reservations
+export default Reservations;

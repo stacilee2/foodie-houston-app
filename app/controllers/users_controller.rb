@@ -10,7 +10,8 @@ skip_before_action :authorize, only: [:create]
 
   #get /me
   def show
-    render json: @current_user
+    user = User.find_by(id: session[:user_id])
+    render json: user
   end
   
   private

@@ -1,22 +1,10 @@
 import React, { useContext } from 'react';
 import { UserContext } from './context/user';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
 
-  const {user, onLogout, loggedIn} = useContext(UserContext)
-  const navigate = useNavigate()
-
-  const logoutUser = () => {
-    fetch('/logout', {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json'}
-    })
-    .then(()=> {
-      onLogout()
-      navigate('/')
-    })
-  }
+  const {user, handleLogout, loggedIn} = useContext(UserContext)
 
     if (!loggedIn) {
       return(
@@ -50,7 +38,7 @@ function Navbar() {
       return (
         <div>
            <div className="nav-bar">
-           <p className="greeting">Welcome, {user.name} <button onClick={logoutUser}>Logout</button></p>
+           <p className="greeting">Welcome, {user.name} <button onClick={handleLogout}>Logout</button></p>
               <Link 
                   to="/" 
                   className="nav-link"
@@ -83,7 +71,6 @@ function Navbar() {
         </div>
       )
     }
-   
-}
+};
 
-export default Navbar
+export default Navbar;

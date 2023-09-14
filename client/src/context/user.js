@@ -12,21 +12,21 @@ function UserProvider({ children }) {
     });
 
     const [loggedIn, setLoggedIn] = useState(false)
-    const navigate = useNavigate();
-   
-    useEffect(() => {
-        fetch('/me')
-        .then((r) => {
-            if (r.ok) {
-              r.json().then((user) => onLogin(user))
-            }
+    const navigate = useNavigate()
+
+        useEffect(() => {
+            fetch('/me')
+            .then((r) => {
+                if (r.ok) {
+                r.json().then((user) => onLogin(user))
+                }
+            });
         }, []);
-    });
-        
+    
+
     function onLogin(user) {
         setUser(user);
         setLoggedIn(true)
-        navigate('/restaurants')
     }
 
     function signup(user) {
@@ -34,12 +34,23 @@ function UserProvider({ children }) {
         setLoggedIn(true)
     }
 
+    function handleLogout() {
+        fetch("/logout", {
+            method: "DELETE",
+          }).then(() => onLogout())
+    };
+    
     function onLogout() {
+        setUser({
+            user: "",
+            reservations: [],
+            restaurants: []
+        })
         setLoggedIn(false)
-        setUser({})
+        navigate("/restaurants")
     }
 
-  return <UserContext.Provider value={{user, setUser, onLogin, onLogout, signup, loggedIn}}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{user, setUser, onLogin, handleLogout, signup, loggedIn}}>{children}</UserContext.Provider>;
 }
 
 export { UserContext, UserProvider };

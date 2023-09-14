@@ -32,7 +32,7 @@ function Login() {
             }, 5000);
           }
       })
-    }
+    };
   
 
   return (
@@ -64,7 +64,7 @@ function Login() {
       </form> 
       <Signup />
     </div>
-  );
-}
+  )
+};
 
 export default Login;

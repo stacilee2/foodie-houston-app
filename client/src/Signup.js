@@ -41,7 +41,7 @@ function Signup() {
             setPasswordConfirmation("")
           }
         })
-    }
+    };
     
     return (
     <div>
@@ -92,7 +92,7 @@ function Signup() {
         <button type="submit">Submit</button>
       </form>
       </div>
-    );
-}
+    )
+};
 
-export default Signup
+export default Signup;

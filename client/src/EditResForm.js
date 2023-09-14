@@ -114,6 +114,6 @@ function EditResForm() {
           </div>
     </div>
   )
-}
+};
 
 export default EditResForm;
