@@ -3,10 +3,12 @@ import { NavLink} from 'react-router-dom';
 import CreateReservation from './CreateReservation';
 import { UserContext } from './context/user';
 
-function RestaurantCard( {restaurant}) {
+function RestaurantCard({restaurant}) {
+   
+    const {loggedIn } = useContext(UserContext)
     const { id, name, cuisine, description, menu, image_url } = restaurant
-    const {loggedIn} = useContext(UserContext)
-    
+  
+ 
     if (loggedIn) {
       return (
         <div key={id} className="restaurant-card">

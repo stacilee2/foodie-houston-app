@@ -23,7 +23,10 @@ function Reservations() {
     .then((r) => r.json())
     .then((deletedRes) => {
         setUser(user => {
-            return {...user, reservations: [...user.reservations.filter(res => res.id !== deletedRes.id)]}
+            return {...user, 
+              reservations: [...user.reservations.filter(res => res.id !== deletedRes.id)], 
+              // restaurants: [...user.user_restaurants.filter(res => res.id !== deletedRes.id)]
+            }
         })
     })
   };
@@ -33,7 +36,7 @@ function Reservations() {
       <h2>Upcoming Reservations:</h2>
       {reservations.map(reservation => 
           <div className="reservation-card" key={reservation.id}>
-          <h4>{reservation.restaurant_name}</h4>
+          <h4>{reservation.restaurant.name}</h4>
           <p>Date: {reservation.date}</p>
           <p>Time: {reservation.time} pm</p>
           <p>Number of guests: {reservation.party_size}</p>

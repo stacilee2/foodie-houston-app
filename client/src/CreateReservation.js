@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function CreateReservation( {restaurantId} ) {
 
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext)
   const [errorsList, setErrorsList] = useState([])
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -15,10 +15,9 @@ function CreateReservation( {restaurantId} ) {
 
   const [reservationDate, setReservationDate] = useState([]);
 
-    
-    const dateOptions = reservationDate.map((res, index) => (
-      <option key={index} value={res}>{res}</option>
-    ));
+  const dateOptions = reservationDate.map((res, index) => (
+    <option key={index} value={res}>{res}</option>
+  ));
 
     function handleChange(e) {
       const name = e.target.name
@@ -51,22 +50,24 @@ function CreateReservation( {restaurantId} ) {
       })
       .then(r => { 
           if (r.ok) {
-              r.json().then(reservation => { 
+              r.json().then((newReservation) => {
+                let newRestaurant = newReservation.restaurant
                   setUser(user => {
                       return {...user, 
-                          ...user.reservations, reservations: [...user.reservations, reservation]}
+                          ...user.reservations, reservations: [...user.reservations, newReservation], restaurants: [...user.restaurants, newRestaurant]}
                   })
+                  
                   navigate('/reservations')})
           } else {
               r.json().then(res => {
                 setErrorsList(res.errors)
                 setTimeout(() => {
-                  setErrorsList([])
+                 setErrorsList([])
                 }, 5000);
               }
               )}
       })
-  }
+  };
 
     useEffect(() => {
       const arrayOfMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -97,8 +98,11 @@ function CreateReservation( {restaurantId} ) {
   return (
     <div className="form-container">
       <p>Please choose what date, time, and party size for your reservation below.</p>
-      <ul className="error-card">{errorsList.map((err, index) => 
-        <li key={index}>{err}</li>)}
+      <ul className="error-card">{
+        errorsList.map((err, index) => 
+          <li key={index}>{err}</li>
+        )
+      }
       </ul>
       <br />
       <form className="form" onSubmit={handleSubmit} id={restaurantId}>

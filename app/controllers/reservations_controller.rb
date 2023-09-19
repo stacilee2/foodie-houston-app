@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-
+    
     def index
         reservations = @current_user.reservations
         render json: reservations
@@ -11,9 +11,9 @@ class ReservationsController < ApplicationController
     end
 
     def create
-        reservation = @current_user.reservations.create!(reservation_params)
+        reservation = @current_user.reservations.create(reservation_params)
         if reservation.valid?
-            render json: reservation
+            render json: reservation, status: :created
         else
             render json: { errors: reservation.errors.full_messages }, status: :unprocessable_entity
         end

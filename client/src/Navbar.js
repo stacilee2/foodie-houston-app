@@ -25,6 +25,13 @@ function Navbar() {
             Restaurants
             </Link>
             <Link 
+              to="/restaurants/new" 
+              className="nav-link"
+              activestyle={{ fontWeight: "bold", color: "pink"
+              }}>
+            Create Restaurant
+            </Link>
+            <Link 
               to="/login" 
               className="nav-link"
               activestyle={{ fontWeight: "bold", color: "pink"
@@ -38,7 +45,8 @@ function Navbar() {
       return (
         <div>
            <div className="nav-bar">
-           <p className="greeting">Welcome, {user.name} <button onClick={handleLogout}>Logout</button></p>
+           <p className="greeting">Welcome, {user.name} 
+           <button onClick={handleLogout}>Logout</button></p>
               <Link 
                   to="/" 
                   className="nav-link"
@@ -52,6 +60,13 @@ function Navbar() {
                   activestyle={{ fontWeight: "bold", color: "pink"
                   }}>
                 Restaurants
+                </Link>
+                <Link 
+                  to="/restaurants/new" 
+                  className="nav-link"
+                  activestyle={{ fontWeight: "bold", color: "pink"
+                  }}>
+                  Create Restaurant
                 </Link>
                 <Link 
                   to="/reservations" 

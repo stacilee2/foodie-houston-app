@@ -21,7 +21,7 @@ skip_before_action :authorize, only: [:create]
   end
   
   def user_params
-    params.permit(:name, :username, :password, :password_confirmation)
+    params.permit(:name, :username, :password, :password_confirmation, :restaurant)
   end
     
 end

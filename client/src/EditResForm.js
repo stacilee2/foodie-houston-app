@@ -8,7 +8,7 @@ function EditResForm() {
     const {user, setUser} = useContext(UserContext);
     const [formData, setFormData] = useState("");
     const [reservationDate, setReservationDate] = useState([]);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const currentReservation = reservation.split(",");
     const restaurantName = currentReservation[0];
