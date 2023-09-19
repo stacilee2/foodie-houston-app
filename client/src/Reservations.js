@@ -25,7 +25,7 @@ function Reservations() {
         setUser(user => {
             return {...user, 
               reservations: [...user.reservations.filter(res => res.id !== deletedRes.id)], 
-              // restaurants: [...user.user_restaurants.filter(res => res.id !== deletedRes.id)]
+              restaurants: [...user.restaurants.filter(res => res.id !== deletedRes.restaurant.id)]
             }
         })
     })

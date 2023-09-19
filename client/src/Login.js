@@ -1,12 +1,19 @@
 import { useState, useContext } from "react";
 import { UserContext } from "./context/user";
 import Signup from "./Signup";
+import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Input from "@material-ui/core/Input";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorsList, setErrorsList] = useState("")
-  const { onLogin } = useContext(UserContext)
+  // const [showPassword, setShowPassword] = useState(false);
+  const [errorsList, setErrorsList] = useState("");
+  const { onLogin } = useContext(UserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,6 +41,17 @@ function Login() {
       })
     };
   
+    // const handleClickShowPassword = () => {
+    //   setValues({ ...values, showPassword: !values.showPassword });
+    // };
+
+    // const handleMouseDownPassword = (event) => {
+    //   event.preventDefault();
+    // };
+
+    // const handlePasswordChange = (prop) => (event) => {
+    //   setValues({ ...values, [prop]: event.target.value });
+    // };
 
   return (
     <div>
