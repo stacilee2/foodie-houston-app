@@ -1,12 +1,15 @@
 import React, {useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from './context/user';
+import {AiFillEye} from "react-icons/ai";
+import {AiOutlineEyeInvisible} from "react-icons/ai";
 
 function Signup() {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [hidePassword, setHidePassword] = useState(true)
     const [errorsList, setErrorsList] = useState([])
     const { signup } = useContext(UserContext)
     const navigate = useNavigate();
@@ -33,7 +36,7 @@ function Signup() {
                 setErrorsList([])
             }, 5000);
           } else {
-          navigate("/restaurants")
+            navigate("/restaurants")
             signup(user)
             setName("")
             setUsername("")
@@ -42,10 +45,18 @@ function Signup() {
           }
         })
     };
+
+    function togglePassword() {
+      hidePassword ? setHidePassword(false) : setHidePassword(true)
+    }
+
+    function toggleConfirmPassword() {
+      hidePassword ? setHidePassword(false) : setHidePassword(true)
+    }
     
     return (
     <div>
-        <h4>Sign-up for your free account today:</h4>
+      <h4>Sign-up for your free account today:</h4>
       <form onSubmit={handleSubmit} className="login-signup-form"> 
       SIGN-UP 
       <br/>
@@ -54,15 +65,16 @@ function Signup() {
       )}</ul>
       <hr />
       <label>Name: </label>
+      <div className='signup-container'>
         <input
           type="text"
           id="signup-name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <br />
-        <br/>
-        <label>Username: </label>
+      </div>
+      <label>Username: </label>
+      <div className='signup-container'>
         <input
           type="text"
           id="signup-username"
@@ -70,28 +82,35 @@ function Signup() {
           onChange={(e) => setUsername(e.target.value)}
         />
         <br />
-        <br/>
-        <label>Password: </label>
+      <label>Password: </label>
+      <div className="password-container">
         <input
-          type="password"
+          type={ hidePassword ? "password" : "text" }
           id="signup-password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)} 
         />
-         <br />
-         <br/>
-        <label>Confirm Password: </label>
+        <div className="toggle-eye" onClick={togglePassword}>
+        { hidePassword ? <AiFillEye/> : <AiOutlineEyeInvisible/>}
+        </div>
+      </div>
+      <label>Confirm Password: </label>
+      <div className='password-container'>
         <input
-          type="password"
+          type={ hidePassword ? "password" : "text" }
           id="signup-password_confirmation"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
-         <br/>
-         <br/>
-        <button type="submit">Submit</button>
-      </form>
+        <div className="toggle-eye" onClick={toggleConfirmPassword}>
+        { hidePassword ? <AiFillEye/> : <AiOutlineEyeInvisible/>}
+        </div>
       </div>
+      </div>
+      <br />
+      <button type="submit">Submit</button>
+      </form>
+    </div>
     )
 };
 

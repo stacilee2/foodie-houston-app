@@ -95,6 +95,29 @@
   font-size: medium;
 }
 
+.username-container{
+  width: 300px;
+  position: relative;
+}
+
+.password-container{
+  width: 300px;
+  position: relative;
+}
+
+.signup-container {
+  width: 300px;
+  position: relative;
+}
+ 
+.toggle-eye {
+  position: absolute;
+  top: 10%;
+  right: 51%;
+  cursor: pointer;
+  color: rgb(175, 173, 173);
+}
+
 .error {
   color: red;
   font-family: Arial, Helvetica, sans-serif

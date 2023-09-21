@@ -1,19 +1,17 @@
 import { useState, useContext } from "react";
 import { UserContext } from "./context/user";
 import Signup from "./Signup";
-import IconButton from "@material-ui/core/IconButton";
-import InputLabel from "@material-ui/core/InputLabel";
-import Visibility from "@material-ui/icons/Visibility";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Input from "@material-ui/core/Input";
+import { useNavigate } from "react-router-dom";
+import {AiFillEye} from "react-icons/ai";
+import {AiOutlineEyeInvisible} from "react-icons/ai";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [showPassword, setShowPassword] = useState(false);
+  const [hidePassword, setHidePassword] = useState(true);
   const [errorsList, setErrorsList] = useState("");
   const { onLogin } = useContext(UserContext);
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -32,6 +30,7 @@ function Login() {
             onLogin(user)
             setUsername("")
             setPassword("")
+            navigate("/restaurants")
           } else {
             setErrorsList(user.error)
             setTimeout(() => {
@@ -40,19 +39,11 @@ function Login() {
           }
       })
     };
+
+    function togglePassword() {
+      hidePassword ? setHidePassword(false) : setHidePassword(true)
+    };
   
-    // const handleClickShowPassword = () => {
-    //   setValues({ ...values, showPassword: !values.showPassword });
-    // };
-
-    // const handleMouseDownPassword = (event) => {
-    //   event.preventDefault();
-    // };
-
-    // const handlePasswordChange = (prop) => (event) => {
-    //   setValues({ ...values, [prop]: event.target.value });
-    // };
-
   return (
     <div>
       <h4>Please Login or Sign-up Here.</h4>
@@ -61,26 +52,30 @@ function Login() {
         <ul className="error-card">{errorsList}</ul>
         <hr />
         <label>Username: </label>
-        <input
-          type="text"
-          id="login-username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <br/>
-        <br/>
-         <label>Password: </label>
-        <input
-          type="text"
-          id="login-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br/>
-        <br/>
+        <div className="username-container">
+          <input
+            type="text"
+            id="login-username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <label>Password: </label>
+        <div className="password-container">
+          <input
+            type={ hidePassword ? "password" : "text" }
+            id="login-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} 
+          />
+          <div className="toggle-eye" onClick={togglePassword}>
+          { hidePassword ? <AiFillEye/> : <AiOutlineEyeInvisible/>}
+          </div>
+        </div>
+        <br />
         <button type="submit">Login</button>
       </form> 
-      <Signup />
+      <Signup togglePassword={togglePassword} />
     </div>
   )
 };

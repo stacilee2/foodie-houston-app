@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 function CreateRestaurant () {
   const { setRestaurantsList, restaurantsList} = useContext(UserContext);
-    const [errorsList, setErrorsList] = useState([]);
     const navigate = useNavigate();
     const [resFormData, setResFormData] = useState({
         name: "",
@@ -46,32 +45,16 @@ function CreateRestaurant () {
         },
         body: JSON.stringify(resFormData),
         })
-        .then(r => { 
-            if (r.ok) {
-                r.json().then(restaurant=> { 
-                  console.log(restaurant)
-                    setRestaurantsList([...restaurantsList, resFormData])
-                    navigate('/restaurants')})
-            } else {
-                r.json().then(res => {
-                    console.log(res.errors)
-                  setErrorsList(res.errors)
-                  setTimeout(() => {
-                   setErrorsList([])
-                  }, 5000);
-                }
-                )}
+        .then(r => r.json())
+        .then(restaurant=> { 
+            setRestaurantsList([...restaurantsList, restaurant])
+            navigate('/restaurants')
         })
-    };
+      };
 
   return (
     <div>
         <form className='create-restaurant-card' onSubmit={handleSubmit}>
-        <ul className="error-card">{
-        errorsList.map((err, index) => 
-          <li key={index}>{err}</li>
-        )
-      } </ul>
         <h4>Create Restaurant Here:</h4>
         <label>Name: </label>
         <input 
