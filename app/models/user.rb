@@ -6,8 +6,4 @@ class User < ApplicationRecord
 
     has_many :reservations
     has_many :restaurants, through: :reservations
-
-    # def user_restaurants
-    #     user.restaurants
-    # end 
 end

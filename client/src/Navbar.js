@@ -45,7 +45,7 @@ function Navbar() {
       return (
         <div>
            <div className="nav-bar">
-           <p className="greeting">Welcome, {user.name} 
+           <p className="greeting">Welcome, {user.name}  
            <button onClick={handleLogout}>Logout</button></p>
               <Link 
                   to="/" 

@@ -68,6 +68,8 @@
   max-width: 600px;
   margin: auto;
   text-align: center;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   margin-bottom: 1rem;
 }
@@ -150,11 +152,15 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   background-color: rgb(247, 242, 238);
   padding: 1%;
-  max-width: 300px;
+  max-width: 200px;
   margin: auto;
   text-align: left;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.input-field {
+  max-width: 400px;
 }
 
 .error-card {

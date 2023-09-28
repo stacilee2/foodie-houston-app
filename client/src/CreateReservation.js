@@ -56,7 +56,6 @@ function CreateReservation( {restaurantId} ) {
                       return {...user, 
                           ...user.reservations, reservations: [...user.reservations, newReservation], restaurants: [...user.restaurants, newRestaurant]}
                   })
-                  
                   navigate('/reservations')})
           } else {
               r.json().then(res => {

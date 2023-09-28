@@ -10,6 +10,7 @@ function Signup() {
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [hidePassword, setHidePassword] = useState(true)
+    const [hidePasswordConfirmation, setHidePasswordConfirmation] = useState(true)
     const [errorsList, setErrorsList] = useState([])
     const { signup } = useContext(UserContext)
     const navigate = useNavigate();
@@ -51,7 +52,7 @@ function Signup() {
     }
 
     function toggleConfirmPassword() {
-      hidePassword ? setHidePassword(false) : setHidePassword(true)
+      hidePasswordConfirmation ? setHidePasswordConfirmation(false) : setHidePasswordConfirmation(true)
     }
     
     return (
@@ -97,13 +98,13 @@ function Signup() {
       <label>Confirm Password: </label>
       <div className='password-container'>
         <input
-          type={ hidePassword ? "password" : "text" }
+          type={ hidePasswordConfirmation ? "password" : "text" }
           id="signup-password_confirmation"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
         />
         <div className="toggle-eye" onClick={toggleConfirmPassword}>
-        { hidePassword ? <AiFillEye/> : <AiOutlineEyeInvisible/>}
+        { hidePasswordConfirmation ? <AiFillEye/> : <AiOutlineEyeInvisible/>}
         </div>
       </div>
       </div>

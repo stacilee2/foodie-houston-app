@@ -29,12 +29,10 @@ class RestaurantsController < ApplicationController
         restaurant.destroy
         render json: restaurant
     end
-
+    
     private
 
     def restaurant_params
         params.permit(:name, :cuisine, :description, :image_url, :menu)
     end
-
-
 end

@@ -10,6 +10,7 @@ function Home() {
     <li>Easy to book reservations</li>
     <li>Keep track of your reservations</li>
     <li>Update and remove reservations</li>
+    <li>Add new restaurants for easy-to-make reservations</li>
     </div>)
 }
 
